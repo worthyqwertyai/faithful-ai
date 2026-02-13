@@ -6,8 +6,17 @@ Access Qwerty from any web browser
 from flask import Flask, render_template, request, jsonify
 from faithful_ai import ai
 import os
+from pathlib import Path
 
-app = Flask(__name__)
+# Get the absolute path to the app directory
+basedir = Path(__file__).parent.absolute()
+
+# Create Flask app with explicit template folder
+app = Flask(
+    __name__,
+    template_folder=str(basedir / 'templates'),
+    static_folder=str(basedir / 'static')
+)
 
 @app.route('/')
 def home():
